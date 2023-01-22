@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image centric - parithi potter</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="upload-container">
+        <form action="" method="post">
+            <label for="file">Upload Image</label>
+            <input type="file" id="file" accept="image/*">
+        </form>
+    </div>
+    <h4 id="uploading"></h4>
+    <script>
+        document.getElementById("file").addEventListener('change', event => {
+            document.getElementById("uploading").innerHTML = "Uploading"
+            document.getElementById("uploading").style.cursor = "wait"
+            const files = event.target.files;
+            var myEle = document.getElementById("myElement");
+            if (myEle) {
+                myEle.remove()
+            }
+
+
+            const formData = new FormData();
+            formData.append('file', files[0]);
+            fetch("http://127.0.0.1:8000/", {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+
+                    let img = document.createElement("img");
+                    img.id = "myElement";
+                    img.src = data.url;
+                    document.querySelector("#uploading").style.display = "none"
+                    document.getElementById("uploading").style.cursor = "default"
+                    document.body.appendChild(img);
+                })
+                .catch(error => {
+                    console.log("error");
+                })
+
+        })
+    </script>
+
+</body>
+
+</html>

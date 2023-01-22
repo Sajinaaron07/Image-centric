@@ -1,0 +1,40 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: #090909;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.upload-container {
+  background: #191919;
+  padding: 1rem;
+  width: 9%;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.upload-container form {
+  margin: 0 auto;
+}
+
+.upload-container form label {
+  font-size: 1rem;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+.upload-container form input {
+  display: none;
+}
+
+img {
+  background-size: cover;
+  width: 50%;
+  margin: 5rem;
+}
