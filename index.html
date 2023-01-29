@@ -10,13 +10,22 @@
 </head>
 
 <body>
-    <div class="upload-container">
-        <form action="" method="post">
-            <label for="file">Upload Image</label>
-            <input type="file" id="file" accept="image/*">
-        </form>
+
+    <div class="main">
+        <div class="upload-container">
+            <form action="" method="post">
+                <label for="file">Upload Image</label>
+                <input type="file" id="file" accept="image/*">
+            </form>
+        </div>
     </div>
+
+
     <h4 id="uploading"></h4>
+    <a href="chat.html" class="chatbot-button">
+        <i class="fas fa-comments"></i>
+        Chat
+    </a>
     <script>
         document.getElementById("file").addEventListener('change', event => {
             document.getElementById("uploading").innerHTML = "Uploading"
@@ -30,7 +39,7 @@
 
             const formData = new FormData();
             formData.append('file', files[0]);
-            fetch("http://127.0.0.1:8000/", {
+            fetch("https://chat-a1qi.onrender.com/", {
                 method: 'POST',
                 body: formData,
             })
