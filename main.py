@@ -2,12 +2,15 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
+from fastapi import Body
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import openai
 
 app = FastAPI()
 load_dotenv()
+
 
 
 app.add_middleware(
@@ -31,5 +34,20 @@ def upload(file:UploadFile = File(...)):
     result = cloudinary.uploader.upload(file.file)
     url = result.get('url')
     return {'url':url}
+
+@app.post("/chat")
+def chat(prompt:str= Body()):
+
+  response = openai.Completion.create(
+      prompt = prompt,
+      model = os.getenv('MODEL'),
+      max_tokens = 1000,
+      temperature = 0.9,
+
+  )
+  
+  
+  return response.choices[0]
+
 
    
