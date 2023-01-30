@@ -10,7 +10,6 @@ app = FastAPI()
 load_dotenv()
 
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -25,12 +24,6 @@ cloudinary.config(
   api_secret = os.getenv("API_SCERET"),
 )
   
-
-
-
-
-
-
 
 
 @app.post("/")
