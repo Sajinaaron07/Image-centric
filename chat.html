@@ -1,69 +1,65 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat with API</title>
-    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="chat.css" />
     <title>Chat here</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div id="chat-container">
-        <div id="input-section">
-            <input type="text" id="input" placeholder="Ask anything btw mind your words here !" name="input">
-            <button id="submit-button" onclick="sendInput()">Go</button>
-        </div>
-        <div id="output-section">
-            <p id="output"></p>
-        </div>
+      <div id="input-section">
+        <input
+          type="text"
+          id="input"
+          placeholder="Ask anything btw mind your words here !"
+          name="input"
+        />
+        <button id="submit-button" onclick="sendInput()">Go</button>
+      </div>
+      <div id="output-section">
+        <p id="output"></p>
+      </div>
     </div>
 
     <script>
-        function sendInput() {
-            const inputText = document.getElementById("input").value;
-            var myEle = document.getElementById("output");
-            if (myEle) {
-                myEle.innerHTML = " "
-            }
-
-            fetch("https://chat-a1qi.onrender.com/chat", {
-                method: "POST",
-                body: JSON.stringify(inputText),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-
-            })
-                .then(response => response.json())
-                .then(data => {
-
-
-
-                    const element = document.getElementById("output");
-                    const outele = document.getElementById("output-section");
-                    outele.style.display = "block";
-                    const text = data.text;
-                    let index = 0;
-
-
-                    type = () => {
-                        if (index < text.length) {
-                            element.innerHTML += text.charAt(index);
-                            index++;
-                            setTimeout(type, 20);
-                        }
-                    }
-                    type();
-
-                })
-                .catch(error => console.error(error));
+      function sendInput() {
+        const inputText = document.getElementById("input").value;
+        var myEle = document.getElementById("output");
+        if (myEle) {
+          myEle.innerHTML = " ";
         }
-    </script>
-</body>
 
+        fetch("https://zaju.onrender.com/", {
+          method: "POST",
+          body: JSON.stringify(inputText),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const element = document.getElementById("output");
+            const outele = document.getElementById("output-section");
+            outele.style.display = "block";
+            const text = data.text;
+            let index = 0;
+
+            type = () => {
+              if (index < text.length) {
+                element.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 20);
+              }
+            };
+            type();
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
+  </body>
 </html>
