@@ -11,6 +11,8 @@ import openai
 app = FastAPI()
 load_dotenv()
 
+openai.apikey = os.getenv("OPENAI_API_KEY")
+
 
 
 app.add_middleware(
